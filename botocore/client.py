@@ -13,6 +13,8 @@
 import logging
 import functools
 
+from datadog import statsd
+
 from botocore import waiter, xform_name
 from botocore.auth import AUTH_TYPE_MAPS
 from botocore.awsrequest import prepare_request_dict
@@ -520,6 +522,7 @@ class BaseClient(object):
         return self.meta.service_model
 
     def _make_api_call(self, operation_name, api_params):
+        statsd.increment('boto.request', tags=["action:%s" % operation_name])
         operation_model = self._service_model.operation_model(operation_name)
         request_context = {
             'client_region': self.meta.region_name,
