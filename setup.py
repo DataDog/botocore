@@ -25,7 +25,7 @@ if sys.version_info[:2] == (2, 6):
 
 setup(
     name='botocore',
-    version=botocore.__version__,
+    version='1.5.65+dd.1',
     description='Low-level, data-driven core of boto 3.',
     long_description=open('README.rst').read(),
     author='Amazon Web Services',
